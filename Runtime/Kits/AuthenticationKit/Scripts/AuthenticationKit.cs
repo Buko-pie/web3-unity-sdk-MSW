@@ -247,7 +247,7 @@ namespace MoralisUnity.Kits.AuthenticationKit
                 {
                     string address = Web3GL.Account().ToLower();
                     string appId = Moralis.DappId;
-                    long serverTime = 0;
+                    // long serverTime = 0;
 
                     // Retrieve server time from Moralis Server for message signature
                     Dictionary<string, object> serverTimeResponse =
@@ -263,10 +263,11 @@ namespace MoralisUnity.Kits.AuthenticationKit
 
                     requestMessageParams.Add("address", address);
                     requestMessageParams.Add("chain", Web3GL.ChainId());
+                    requestMessageParams.Add("network", "evm");
 
                     Dictionary<string, object> authMessage = await Moralis.Cloud.RunAsync<Dictionary<string, object>>("requestMessage", requestMessageParams);
 
-                    string signMessage = authMessage["message"].ToString();
+                    signMessage = authMessage["message"].ToString();
 
                     string signature = null;
 
@@ -358,7 +359,7 @@ namespace MoralisUnity.Kits.AuthenticationKit
             // Extract wallet address from the Wallet Connect Session data object.
             string address = session.Accounts[0].ToLower();
             string appId = Moralis.DappId;
-            long serverTime = 0;
+            // long serverTime = 0;
 
             // Retrieve server time from Moralis Server for message signature
             Dictionary<string, object> serverTimeResponse = await Moralis.Cloud

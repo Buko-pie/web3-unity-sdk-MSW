@@ -121,13 +121,13 @@ namespace MoralisUnity.Web3Api.Interfaces
 		/// 
 		/// </summary>
 		/// <param name="address">The owner of a given token</param>
-		/// <param name="tokenAddress">Address of the contract</param>
+		/// <param name="tokenAddresses">Address of the contract</param>
 		/// <param name="chain">The chain to query</param>
 		/// <param name="format">The format of the token id</param>
 		/// <param name="offset">offset</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of nft owners</returns>
-		UniTask<NftOwnerCollection> GetNFTsForContract (string address, string tokenAddress, ChainList chain, string cursor="", string format=null, int? limit=null);
+		UniTask<NftOwnerCollection> GetNFTsForContract (string address, string[] tokenAddresses, ChainList chain, string cursor="", string format=null, int? limit=null);
 
 	}
 }

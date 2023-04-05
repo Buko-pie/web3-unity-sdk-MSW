@@ -418,14 +418,14 @@ namespace MoralisUnity.Web3Api.Api
 		/// <param name="format">The format of the token id</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of nft owners</returns>
-		public async UniTask<NftOwnerCollection> GetNFTsForContract (string address, string tokenAddress, ChainList chain, string cursor="", string format=null, int? limit=null)
+		public async UniTask<NftOwnerCollection> GetNFTsForContract (string address, string[] tokenAddresses, ChainList chain, string cursor="", string format=null, int? limit=null)
 		{
 
 			// Verify the required parameter 'address' is set
 			if (address == null) throw new ApiException(400, "Missing required parameter 'address' when calling GetNFTsForContract");
 
 			// Verify the required parameter 'tokenAddress' is set
-			if (tokenAddress == null) throw new ApiException(400, "Missing required parameter 'tokenAddress' when calling GetNFTsForContract");
+			if (tokenAddresses == null) throw new ApiException(400, "Missing required parameter 'tokenAddresses' when calling GetNFTsForContract");
 
 			var postBody = new Dictionary<String, String>();
 			var queryParams = new Dictionary<String, String>();
@@ -433,10 +433,10 @@ namespace MoralisUnity.Web3Api.Api
 			var formParams = new Dictionary<String, String>();
 			var fileParams = new Dictionary<String, FileParameter>();
 
-			var path = "/{address}/nft/{token_address}";
+			var path = "/{address}/nft/{token_addresses}";
 			path = path.Replace("{format}", "json");
 			path = path.Replace("{" + "address" + "}", ApiClient.ParameterToString(address));
-			path = path.Replace("{" + "token_address" + "}", ApiClient.ParameterToString(tokenAddress));
+			path = path.Replace("{" + "token_addresses" + "}", ApiClient.ParameterToString(tokenAddresses));
 			queryParams.Add("chain", ApiClient.ParameterToHex((long)chain));
 			if(format != null) queryParams.Add("format", ApiClient.ParameterToString(format));
 			if(cursor != null) queryParams.Add("cursor", ApiClient.ParameterToString(cursor));

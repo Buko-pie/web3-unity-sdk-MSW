@@ -2,14 +2,14 @@
 *            Module: AccountApi.cs
 *       Description: Represents a collection of functions to interact with the API endpoints
 *            Author: Moralis Web3 Technology AB, 559307-5988 - David B. Goodrich
-*  
-* NOTE: THIS FILE HAS BEEN AUTOMATICALLY GENERATED. ANY CHANGES MADE TO THIS 
+*
+* NOTE: THIS FILE HAS BEEN AUTOMATICALLY GENERATED. ANY CHANGES MADE TO THIS
 * FILE WILL BE LOST
 *
 * MIT License
-*  
+*
 * Copyright (c) 2022 Moralis Web3 Technology AB, 559307-5988
-*  
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the 'Software'), to deal
 * in the Software without restriction, including without limitation the rights
@@ -410,16 +410,16 @@ namespace MoralisUnity.Web3Api.CloudApi
 		/// <param name="format">The format of the token id</param>
 		/// <param name="limit">limit</param>
 		/// <returns>Returns a collection of nft owners</returns>
-		public async UniTask<NftOwnerCollection> GetNFTsForContract (string address, string tokenAddress, ChainList chain, string cursor="", string format=null, int? limit=null)
+		public async UniTask<NftOwnerCollection> GetNFTsForContract (string address, string[] tokenAddresses, ChainList chain, string cursor="", string format=null, int? limit=null)
 		{
 
 			// Verify the required parameter 'address' is set
 			if (address == null) throw new ApiException(400, "Missing required parameter 'address' when calling GetNFTsForContract");
 
 			// Verify the required parameter 'tokenAddress' is set
-			if (tokenAddress == null) throw new ApiException(400, "Missing required parameter 'tokenAddress' when calling GetNFTsForContract");
+			if (tokenAddresses == null) throw new ApiException(400, "Missing required parameter 'tokenAddress' when calling GetNFTsForContract");
 
-			var postBody = new Dictionary<String, String>();
+			var postBody = new Dictionary<String, dynamic>();
 			var queryParams = new Dictionary<String, String>();
 			var headerParams = new Dictionary<String, String>();
 			var formParams = new Dictionary<String, String>();
@@ -427,10 +427,10 @@ namespace MoralisUnity.Web3Api.CloudApi
 
 			var path = "/functions/getNFTsForContract";
 			if (address != null) postBody.Add("address", ApiClient.ParameterToString(address));
-			if (tokenAddress != null) postBody.Add("token_address", ApiClient.ParameterToString(tokenAddress));
-			if (format != null) postBody.Add("format", ApiClient.ParameterToString(format));
-			if (cursor != null) postBody.Add("cursor", ApiClient.ParameterToString(cursor));
-			if (limit != null) postBody.Add("limit", ApiClient.ParameterToString(limit));
+			if (tokenAddresses != null) postBody.Add("tokenAddresses", tokenAddresses);
+			postBody.Add("format", format != null ? ApiClient.ParameterToString(format) : "decimal");
+			postBody.Add("cursor",  cursor != null ? ApiClient.ParameterToString(cursor) : "");
+			postBody.Add("limit", limit != null && limit <= 100 ? ApiClient.ParameterToString(limit) : "100");
 			postBody.Add("chain", ApiClient.ParameterToHex((long)chain));
 
 			// Authentication setting, if any
